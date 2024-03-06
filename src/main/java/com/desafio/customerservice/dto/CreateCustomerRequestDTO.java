@@ -1,5 +1,6 @@
 package com.desafio.customerservice.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -18,6 +19,10 @@ public class CreateCustomerRequestDTO {
 
     @NotNull
     private String documentType;
+
+    @NotNull
+    @Email
+    private String email;
 
     @NotNull
     private String address;

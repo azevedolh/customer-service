@@ -16,6 +16,7 @@ public class CustomerResponseDTO {
     private String documentType;
     private String name;
     private String address;
+    private String email;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

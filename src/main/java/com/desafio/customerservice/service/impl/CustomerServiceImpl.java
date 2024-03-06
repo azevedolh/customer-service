@@ -23,6 +23,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.desafio.customerservice.util.ConstantUtil.SORT_BY_CREATED_AT;
 
@@ -83,7 +84,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer getById(Long id) {
+    public CustomerResponseDTO getById(UUID id) {
         Optional<Customer> customerOptional = customerRepository.findById(id);
 
         if (customerOptional.isEmpty()) {
@@ -91,6 +92,6 @@ public class CustomerServiceImpl implements CustomerService {
             throw new CustomBusinessException(HttpStatus.NOT_FOUND, message);
         }
 
-        return customerOptional.get();
+        return customerResponseMapper.toDto(customerOptional.get());
     }
 }

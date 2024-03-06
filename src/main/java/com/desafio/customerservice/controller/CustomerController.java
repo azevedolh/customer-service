@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.UUID;
 
 @Log4j2
 @RestController
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @Autowired
     public CustomerController(CustomerService customerService) {
@@ -48,5 +49,10 @@ public class CustomerController {
                 .toUri();
         log.info("Successfully created Customer with ID: " + createdCustomer.getId());
         return ResponseEntity.created(locationResource).body(PostResponseDTO.builder().id(createdCustomer.getId()).build());
+    }
+
+    @GetMapping("/{customerId}")
+    public ResponseEntity<CustomerResponseDTO> getById(@PathVariable("customerId") UUID customerId) {
+        return new ResponseEntity<CustomerResponseDTO>(customerService.getById(customerId), HttpStatus.OK);
     }
 }

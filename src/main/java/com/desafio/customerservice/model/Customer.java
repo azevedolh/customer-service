@@ -32,6 +32,8 @@ public class Customer {
 
     private String address;
 
+    private String email;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
